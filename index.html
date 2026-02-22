@@ -1,460 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Rajashekhar B Durgard | Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        :root {
-            --ios-bg: #000;
-            --ios-glass: rgba(255, 255, 255, 0.08);
-            --ios-border: rgba(255, 255, 255, 0.12);
-            --ios-text: #ffffff;
-            --ios-sub: rgba(255, 255, 255, 0.5);
-            --ios-blue: #007AFF;
-            --ios-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+<meta charset="UTF-8">
+<title>Rajashekhar B Durgad | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            scroll-behavior: smooth;
-        }
+<style>
+:root{
+    --ios-bg:#000;
+    --ios-glass:rgba(255,255,255,0.08);
+    --ios-border:rgba(255,255,255,0.12);
+    --ios-text:#fff;
+    --ios-sub:rgba(255,255,255,0.55);
+    --ios-blue:#007AFF;
+    --ios-purple:#5856D6;
+    --ios-pink:#FF2D55;
+    --spring:cubic-bezier(.34,1.56,.64,1);
+}
 
-        body {
-            background-color: var(--ios-bg);
-            color: var(--ios-text);
-            overflow-x: hidden;
-            perspective: 1000px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    scroll-behavior:smooth;
+}
 
-        /* Cinematic Grain */
-        .grain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
+body{
+    background:var(--ios-bg);
+    color:var(--ios-text);
+    overflow-x:hidden;
+    perspective:1200px;
+}
 
-        /* Mesh Gradient Background */
-        .mesh-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.5;
-            overflow: hidden;
-        }
+/* Grain */
+.grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.03;
+    z-index:9999;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
 
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            transition: 2s ease;
-        }
+/* Mesh Background */
+.mesh{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    filter:blur(90px);
+    opacity:.5;
+}
 
-        .blob-1 { width: 800px; height: 800px; background: radial-gradient(circle, #5856D6 0%, transparent 70%); top: -200px; left: -200px; animation: orbit 20s linear infinite; }
-        .blob-2 { width: 700px; height: 700px; background: radial-gradient(circle, #007AFF 0%, transparent 70%); bottom: -200px; right: -200px; animation: orbit 25s linear infinite reverse; }
-        .blob-3 { width: 600px; height: 600px; background: radial-gradient(circle, #FF2D55 0%, transparent 70%); top: 30%; left: 40%; animation: orbit 30s linear infinite; }
+.blob{
+    position:absolute;
+    border-radius:50%;
+    animation:orbit 25s linear infinite;
+}
 
-        @keyframes orbit {
-            from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
-            to { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
-        }
+.blob:nth-child(1){
+    width:900px;height:900px;
+    background:radial-gradient(circle,var(--ios-purple),transparent 70%);
+    top:-300px;left:-300px;
+}
 
-        /* Hero */
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+.blob:nth-child(2){
+    width:800px;height:800px;
+    background:radial-gradient(circle,var(--ios-blue),transparent 70%);
+    bottom:-300px;right:-300px;
+    animation-direction:reverse;
+}
 
-        .profile-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 38px;
-            background: linear-gradient(135deg, #007AFF, #5856D6);
-            margin-bottom: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            font-weight: 800;
-            animation: spring-in 1.2s var(--ios-spring);
-        }
+.blob:nth-child(3){
+    width:700px;height:700px;
+    background:radial-gradient(circle,var(--ios-pink),transparent 70%);
+    top:30%;left:40%;
+}
 
-        h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            font-weight: 800;
-            letter-spacing: -2.5px;
-            margin-bottom: 8px;
-            background: linear-gradient(to bottom, #fff, #888);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: slide-up 0.8s var(--ios-spring) both;
-        }
+@keyframes orbit{
+    from{transform:rotate(0deg) translateX(60px) rotate(0deg);}
+    to{transform:rotate(360deg) translateX(60px) rotate(-360deg);}
+}
 
-        .tagline {
-            font-size: 1.4rem;
-            color: var(--ios-sub);
-            font-weight: 500;
-            max-width: 650px;
-            letter-spacing: -0.5px;
-            animation: slide-up 0.8s var(--ios-spring) 0.1s both;
-        }
+/* NAV */
+nav{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(28,28,30,.9);
+    backdrop-filter:blur(30px);
+    border:1px solid var(--ios-border);
+    border-radius:24px;
+    padding:8px 14px;
+    display:flex;
+    gap:8px;
+    z-index:1000;
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
 
-        /* Glass Cards */
-        section {
-            max-width: 1100px;
-            margin: 140px auto;
-            padding: 0 24px;
-        }
+nav a{
+    text-decoration:none;
+    color:var(--ios-sub);
+    padding:10px 18px;
+    border-radius:16px;
+    font-size:.85rem;
+    font-weight:600;
+    transition:.3s var(--spring);
+}
 
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 40px;
-            letter-spacing: -1px;
-            color: rgba(255, 255, 255, 0.9);
-        }
+nav a:hover,
+nav a.active{
+    background:#fff;
+    color:#000;
+}
 
-        .glass-card {
-            background: var(--ios-glass);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
-            border: 1px solid var(--ios-border);
-            border-radius: 36px;
-            padding: 48px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease, box-shadow 0.4s ease;
-            overflow: hidden;
-        }
+/* HERO */
+header{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
 
-        /* Internal Glow Follower */
-        .glass-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.08) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
+.profile{
+    width:150px;
+    height:150px;
+    border-radius:40px;
+    background:linear-gradient(135deg,var(--ios-blue),var(--ios-purple));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:4rem;
+    font-weight:800;
+    margin-bottom:24px;
+    box-shadow:0 30px 60px rgba(0,0,0,.5);
+    animation:springIn 1s var(--spring);
+}
 
-        .glass-card:hover::after {
-            opacity: 1;
-        }
+h1{
+    font-size:clamp(3rem,8vw,5rem);
+    font-weight:800;
+    letter-spacing:-2px;
+    background:linear-gradient(to bottom,#fff,#888);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
 
-        .glass-card:hover {
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-        }
+.tagline{
+    font-size:1.3rem;
+    margin-top:10px;
+    color:var(--ios-sub);
+}
 
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-        }
+/* SECTION */
+section{
+    max-width:1100px;
+    margin:140px auto;
+    padding:0 24px;
+}
 
-        /* Navigation (Dynamic Island style) */
-        nav {
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(28, 28, 30, 0.9);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 24px;
-            padding: 8px 16px;
-            display: flex;
-            gap: 8px;
-            z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s var(--ios-spring);
-        }
+h2{
+    font-size:2.2rem;
+    font-weight:800;
+    margin-bottom:40px;
+}
 
-        nav:active {
-            transform: translateX(-50%) scale(0.95);
-        }
+/* GLASS CARD */
+.glass{
+    background:var(--ios-glass);
+    backdrop-filter:blur(50px);
+    border:1px solid var(--ios-border);
+    border-radius:36px;
+    padding:48px;
+    position:relative;
+    transition:.3s;
+    transform-style:preserve-3d;
+}
 
-        nav a {
-            text-decoration: none;
-            color: var(--ios-sub);
-            padding: 12px 22px;
-            border-radius: 16px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.3s var(--ios-spring);
-        }
+.glass:hover{
+    box-shadow:0 40px 80px rgba(0,0,0,.6);
+}
 
-        nav a:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-        }
+/* Mouse Glow */
+.glass::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at var(--x) var(--y),rgba(255,255,255,.08),transparent 60%);
+    opacity:0;
+    transition:.4s;
+    pointer-events:none;
+}
+.glass:hover::after{opacity:1;}
 
-        nav a.active {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-        }
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:32px;
+}
 
-        /* Skill Pills */
-        .pill {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 24px;
-            border-radius: 24px;
-            margin: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border: 1px solid var(--ios-border);
-            transition: 0.4s var(--ios-spring);
-        }
+/* Skill Pills */
+.pill{
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:24px;
+    background:rgba(255,255,255,.05);
+    margin:6px;
+    font-weight:600;
+    border:1px solid var(--ios-border);
+    transition:.3s var(--spring);
+}
+.pill:hover{
+    background:var(--ios-blue);
+    transform:scale(1.1);
+}
 
-        .pill:hover {
-            background: var(--ios-blue);
-            transform: scale(1.1) rotate(2deg);
-            border-color: transparent;
-        }
+/* Reveal */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s var(--spring);
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
 
-        /* Animations */
-        @keyframes spring-in {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+footer{
+    text-align:center;
+    padding:120px 20px 180px;
+    color:var(--ios-sub);
+}
 
-        @keyframes slide-up {
-            from { transform: translateY(60px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+@keyframes springIn{
+    from{transform:scale(.5);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: 1.2s var(--ios-spring);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        footer {
-            text-align: center;
-            padding: 100px 20px 180px;
-            color: var(--ios-sub);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            h1 { font-size: 3.5rem; }
-            .glass-card { padding: 36px; }
-            nav { bottom: 20px; width: 95%; justify-content: space-around; }
-            nav a { padding: 10px 14px; font-size: 0.8rem; }
-        }
-    </style>
+@media(max-width:768px){
+    nav{width:95%;justify-content:space-around;}
+    .glass{padding:36px;}
+}
+</style>
 </head>
 
 <body>
-    <div class="grain"></div>
-    <div class="mesh-container">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
 
-    <nav>
-        <a href="#about" class="active">Bio</a>
-        <a href="#skills">Tech</a>
-        <a href="#experience">EXP</a>
-        <a href="#projects">Work</a>
-        <a href="#contact">Connect</a>
-    </nav>
+<div class="grain"></div>
+<div class="mesh">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+</div>
 
-    <header id="header">
-        <div class="profile-img">R</div>
-        <h1 id="main-title">Rajashekhar</h1>
-        <p class="tagline">MCA Student • AI & ML Intern • Engineering the future of intelligent systems.</p>
-    </header>
+<nav>
+<a href="#about" class="active">Bio</a>
+<a href="#skills">Skills</a>
+<a href="#experience">Exp</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
 
-    <section id="about" class="reveal">
-        <h2>Bio</h2>
-        <div class="glass-card">
-            <p style="font-size: 1.2rem; line-height: 1.8; font-weight: 400; color: rgba(255,255,255,0.9);">
-                I'm an MCA student at KLE Technological University (Class of 2026). My work focuses on the intersection of <strong>high-performance software architecture</strong> and <strong>intelligent Machine Learning models</strong>. 
-                I specialize in building scalable, data-driven solutions that bridge complex backend logic with cutting-edge AI.
-            </p>
-        </div>
-    </section>
+<header>
+<div class="profile">R</div>
+<h1>Rajashekhar B Durgad</h1>
+<p class="tagline">MCA Student • AI & ML Intern • Full-Stack Developer</p>
+</header>
 
-    <section id="skills" class="reveal">
-        <h2>Tech Stack</h2>
-        <div class="grid">
-            <div class="glass-card">
-                <h3 style="margin-bottom: 24px; color: var(--ios-blue); font-size: 1.5rem;">Languages</h3>
-                <div class="pill">Python</div>
-                <div class="pill">Java</div>
-                <div class="pill">C</div>
-                <div class="pill">JavaScript</div>
-                <div class="pill">PHP</div>
-            </div>
-            <div class="glass-card">
-                <h3 style="margin-bottom: 24px; color: #5856D6; font-size: 1.5rem;">AI / ML</h3>
-                <div class="pill">Django</div>
-                <div class="pill">PyTorch</div>
-                <div class="pill">TensorFlow</div>
-                <div class="pill">Data Analysis</div>
-            </div>
-            <div class="glass-card">
-                <h3 style="margin-bottom: 24px; color: #FF2D55; font-size: 1.5rem;">Systems</h3>
-                <div class="pill">Linux</div>
-                <div class="pill">MySQL</div>
-                <div class="pill">Git</div>
-                <div class="pill">Docker</div>
-            </div>
-        </div>
-    </section>
+<section id="about" class="reveal">
+<h2>Bio</h2>
+<div class="glass">
+Focused on scalable backend systems and intelligent AI models. Experienced with Django development, machine learning workflows, and database optimization.
+</div>
+</section>
 
-    <section id="experience" class="reveal">
-        <h2>Experience</h2>
-        <div class="grid" style="grid-template-columns: 1fr;">
-            <div class="glass-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                    <h3 style="font-size: 1.6rem;">AI & ML Intern</h3>
-                    <span style="font-size: 0.95rem; color: var(--ios-sub); font-weight: 600;">Nov 2025 – Present</span>
-                </div>
-                <p style="color: var(--ios-blue); font-weight: 700; margin-bottom: 20px; font-size: 1.1rem;">Neo Skillz</p>
-                <p style="color: var(--ios-sub); font-size: 1.05rem; line-height: 1.6;">Developing advanced neural architectures and predictive diagnostics. Focused on optimizing custom Python pipelines for high-accuracy model training.</p>
-            </div>
-            <div class="glass-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                    <h3 style="font-size: 1.6rem;">Full-Stack Intern</h3>
-                    <span style="font-size: 0.95rem; color: var(--ios-sub); font-weight: 600;">Apr 2024 – Jun 2024</span>
-                </div>
-                <p style="color: #5856D6; font-weight: 700; margin-bottom: 20px; font-size: 1.1rem;">HAEGL Technologies Pvt Ltd</p>
-                <p style="color: var(--ios-sub); font-size: 1.05rem; line-height: 1.6;">Engineered scalable web infrastructures using Django. Implemented complex backend logic and integrated secure database models for high-concurrency systems.</p>
-            </div>
-        </div>
-    </section>
+<section id="skills" class="reveal">
+<h2>Tech Stack</h2>
+<div class="grid">
+<div class="glass">
+<h3 style="color:var(--ios-blue);margin-bottom:20px;">Languages</h3>
+<div class="pill">Python</div>
+<div class="pill">Java</div>
+<div class="pill">C</div>
+<div class="pill">JavaScript</div>
+<div class="pill">PHP</div>
+</div>
 
-    <section id="projects" class="reveal">
-        <h2>Projects</h2>
-        <div class="grid">
-            <div class="glass-card">
-                <h3 style="margin-bottom: 16px; font-size: 1.4rem;">DailyFlow</h3>
-                <p style="color: var(--ios-sub); font-size: 1rem; line-height: 1.5;">A productivity ecosystem designed for seamless task orchestration and cognitive flow management.</p>
-            </div>
-            <div class="glass-card">
-                <h3 style="margin-bottom: 16px; font-size: 1.4rem;">Medveda</h3>
-                <p style="color: var(--ios-sub); font-size: 1rem; line-height: 1.5;">Blockchain-powered health data platform ensuring absolute integrity and security for medical records.</p>
-            </div>
-            <div class="glass-card">
-                <h3 style="margin-bottom: 16px; font-size: 1.4rem;">Anveshana</h3>
-                <p style="color: var(--ios-sub); font-size: 1rem; line-height: 1.5;">Intelligent tourism analytics with real-time predictive dashboards and geo-spatial data insights.</p>
-            </div>
-        </div>
-    </section>
+<div class="glass">
+<h3 style="color:var(--ios-purple);margin-bottom:20px;">AI / ML</h3>
+<div class="pill">Machine Learning</div>
+<div class="pill">Data Analysis</div>
+<div class="pill">Django</div>
+</div>
 
-    <section id="contact" class="reveal">
-        <h2>Connect</h2>
-        <div class="glass-card" style="text-align: center;">
-            <p style="color: var(--ios-sub); margin-bottom: 40px; font-size: 1.1rem;">Ready for the next challenge. Let's build something exceptional.</p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;">
-                <a href="mailto:rajashekhardurgad01@gmail.com" class="pill" style="text-decoration: none; color: white;">Email</a>
-                <a href="tel:7022199119" class="pill" style="text-decoration: none; color: white;">Call</a>
-                <a href="https://www.linkedin.com/in/rajashekhardurgad" target="_blank" class="pill" style="text-decoration: none; color: white;">LinkedIn</a>
-            </div>
-        </div>
-    </section>
+<div class="glass">
+<h3 style="color:var(--ios-pink);margin-bottom:20px;">Systems</h3>
+<div class="pill">Linux</div>
+<div class="pill">MySQL</div>
+<div class="pill">Git</div>
+</div>
+</div>
+</section>
 
-    <footer>
-        Designed by Rajashekhar B Durgard &copy; 2026
-    </footer>
+<section id="experience" class="reveal">
+<h2>Experience</h2>
+<div class="grid" style="grid-template-columns:1fr;">
+<div class="glass">
+<h3>AI & ML Intern – Neo Skillz</h3>
+<p style="color:var(--ios-sub);margin-top:10px;">Nov 2025 – Present</p>
+<p style="margin-top:15px;">Working on ML pipelines, preprocessing data, and predictive modeling.</p>
+</div>
 
-    <script>
-        // --- 3D Tilt and Mouse Glow ---
-        const cards = document.querySelectorAll('.glass-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Mouse follow glow
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-                
-                // 3D Tilt
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-            });
-        });
+<div class="glass">
+<h3>Full-Stack Intern – HAEGL Technologies</h3>
+<p style="color:var(--ios-sub);margin-top:10px;">Apr 2024 – Jun 2024</p>
+<p style="margin-top:15px;">Developed Django applications and optimized backend logic.</p>
+</div>
+</div>
+</section>
 
-        // --- Scroll Reveal ---
-        function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            const windowHeight = window.innerHeight;
-            reveals.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    el.classList.add("active");
-                }
-            });
-        }
-        window.addEventListener("scroll", reveal);
+<section id="projects" class="reveal">
+<h2>Projects</h2>
+<div class="grid">
+<div class="glass">
+<h3>DailyFlow</h3>
+<p style="color:var(--ios-sub);margin-top:10px;">Productivity management ecosystem.</p>
+</div>
 
-        // --- Active Nav ---
-        const sections = document.querySelectorAll("section, header");
-        const navLinks = document.querySelectorAll("nav a");
-        
-        window.addEventListener("scroll", () => {
-            let current = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.pageYOffset >= sectionTop - 300) {
-                    current = section.getAttribute("id") || "header";
-                }
-            });
+<div class="glass">
+<h3>Medveda</h3>
+<p style="color:var(--ios-sub);margin-top:10px;">Blockchain-powered healthcare integrity platform.</p>
+</div>
 
-            navLinks.forEach(a => {
-                a.classList.remove("active");
-                const href = a.getAttribute("href").substring(1);
-                if (href === current || (href === "about" && current === "header")) {
-                    a.classList.add("active");
-                }
-            });
-        });
+<div class="glass">
+<h3>Anveshana</h3>
+<p style="color:var(--ios-sub);margin-top:10px;">Tourism management analytics system.</p>
+</div>
 
-        reveal();
-    </script>
+<div class="glass">
+<h3>Nandi Medicals Management System</h3>
+<p style="color:var(--ios-sub);margin-top:10px;">
+Pharmacy inventory & billing system with stock tracking and supplier management.
+</p>
+</div>
+</div>
+</section>
+
+<section id="contact" class="reveal">
+<h2>Connect</h2>
+<div class="glass" style="text-align:center;">
+<p style="color:var(--ios-sub);margin-bottom:30px;">Let’s build something exceptional.</p>
+<div class="pill"><a href="mailto:rajashekhardurgad01@gmail.com" style="color:#fff;text-decoration:none;">Email</a></div>
+<div class="pill"><a href="tel:7022199119" style="color:#fff;text-decoration:none;">Call</a></div>
+<div class="pill"><a href="https://www.linkedin.com/in/rajashekhardurgad" target="_blank" style="color:#fff;text-decoration:none;">LinkedIn</a></div>
+</div>
+</section>
+
+<footer>
+© 2026 Rajashekhar B Durgad
+</footer>
+
+<script>
+// Mouse glow + tilt
+document.querySelectorAll('.glass').forEach(card=>{
+card.addEventListener('mousemove',e=>{
+const rect=card.getBoundingClientRect();
+const x=e.clientX-rect.left;
+const y=e.clientY-rect.top;
+card.style.setProperty('--x',x+'px');
+card.style.setProperty('--y',y+'px');
+
+const rotateX=(y-rect.height/2)/20;
+const rotateY=(rect.width/2-x)/20;
+card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+card.addEventListener('mouseleave',()=>{
+card.style.transform='rotateX(0) rotateY(0)';
+});
+});
+
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('active');
+}
+});
+},{threshold:.2});
+reveals.forEach(r=>obs.observe(r));
+
+// Active nav
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll("nav a");
+
+window.addEventListener("scroll",()=>{
+let current="";
+sections.forEach(sec=>{
+const top=sec.offsetTop-300;
+if(pageYOffset>=top){current=sec.id;}
+});
+navLinks.forEach(a=>{
+a.classList.remove("active");
+if(a.getAttribute("href")==="#"+current){
+a.classList.add("active");
+}
+});
+});
+</script>
+
 </body>
 </html>
